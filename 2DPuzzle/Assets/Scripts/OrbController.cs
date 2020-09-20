@@ -21,11 +21,14 @@ public class OrbController : MonoBehaviour,IPointerDownHandler,IPointerEnterHand
     }
 
     public OrbType ThisOrbType = OrbType.Invalide;
+    public ParticleSystem ComnboEffect;
 
+    public OrbGenerater OrbGenerater = null;
     
     private void Awake()
     {
         m_spriteRenderer = GetComponent<SpriteRenderer>();
+        ComnboEffect.gameObject.SetActive(false);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -68,6 +71,7 @@ public class OrbController : MonoBehaviour,IPointerDownHandler,IPointerEnterHand
             {
                 orb.SetActive(false);
             }
+            OrbGenerater.OrbGenerate(comboCounter.ComboCount);
         }
         comboCounter.ClearCombo();
     }

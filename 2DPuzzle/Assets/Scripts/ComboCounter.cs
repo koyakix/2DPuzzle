@@ -10,19 +10,48 @@ public class ComboCounter : MonoBehaviour
 
     public int ComboCount => DragObjList.Count;
 
+    public int CurrentComboCount;
+
     public void AddCombo(GameObject orb)
     {
         DragObjList.Add(orb);
+        foreach (var orbs in DragObjList)
+        {
+            var comboEffect = orbs.GetComponent<OrbController>().ComnboEffect.gameObject;
+            if (!comboEffect.activeSelf)
+            {
+                comboEffect.SetActive(true);
+            }
+        }
     }
 
     public void MinusCombo()
     {
+        DragObjList.LastOrDefault().GetComponent<OrbController>().ComnboEffect.gameObject.SetActive(false);
         DragObjList.Remove(DragObjList.LastOrDefault());
+       
     }
 
     public void ClearCombo()
     {
-        DragObjList.Clear();
+        foreach (var orbs in DragObjList)
+        {
+            var comboEffect = orbs.GetComponent<OrbController>().ComnboEffect.gameObject;
+            if (comboEffect.activeSelf)
+            {
+                comboEffect.SetActive(false);
+            }
+            
+            if (CurrentComboCount <= 6)
+            {
+                CurrentComboCount++;
+            }
+            else
+            {
+                CurrentComboCount += 2;
+               
+            }
+        }
+        DragObjList.Clear();      
     }
-    
 }
