@@ -42,16 +42,28 @@ public class ComboCounter : MonoBehaviour
                 comboEffect.SetActive(false);
             }
             
-            if (CurrentComboCount <= 6)
-            {
+
                 CurrentComboCount++;
-            }
-            else
-            {
-                CurrentComboCount += 2;
-               
-            }
+
         }
         DragObjList.Clear();      
     }
+
+
+    /// <summary>
+    ///  ドロップした最後のボールと次のボールの距離を測定
+    /// </summary>
+    /// <param name="thisOrbTransform"></param>
+    /// <returns></returns>
+    public bool CheckCombo(Transform thisOrbTransform)
+    {
+
+        float diff = (DragObjList.LastOrDefault().transform.position - thisOrbTransform.position).magnitude;
+        
+       // Debug.Log("きょり" + diff);
+
+        return diff >= 1.8f;
+    }
+
+
 }

@@ -5,7 +5,7 @@ using TMPro;
 
 public class LimitTimeCountViewer : MonoBehaviour
 {
-    float m_limitTime;
+    public float m_limitTime;
     [SerializeField] TextMeshProUGUI m_TimeText;
 
     // Start is called before the first frame update

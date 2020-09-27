@@ -43,6 +43,14 @@ public class OrbController : MonoBehaviour,IPointerDownHandler,IPointerEnterHand
             return;
         }
 
+        //同一色の距離が離れているかどうかのチェック
+        if (comboCounter.CheckCombo(this.gameObject.transform))
+        {
+            return;
+        }
+        
+
+
         if (comboCounter.DragObjList.Contains(this.gameObject))
         {
             if (comboCounter.DragObjList.Count.Equals(1))
